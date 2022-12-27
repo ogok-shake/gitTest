@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util-4.3.xsd">
+    <!-- DataSource -->	
+    <alias name="dataSource-mysql" alias="dataSource"/>
+    
+	
+	<util:properties id="global" location="classpath:/globals.properties" />
+	
+
+	<bean id="dataSource-mysql" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="#{global['Globals.DriverClassName']}"/>
+		<property name="url" value="#{global['Globals.Url']}" />
+		<property name="username" value="#{global['Globals.UserName']}"/>
+		<property name="password" value="#{global['Globals.Password']}"/>
+	</bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">		
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/chat/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:/mybatis/mapper/chat/*.xml"></property>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+</beans>	

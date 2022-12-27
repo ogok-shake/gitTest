@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="main">
+   
+   
+   	<select id="selectMainData" resultType="java.util.HashMap">
+
+		SELECT 
+			(
+			select contents 
+			FROM comm_code 
+			where code_group='name' 
+			and code_nm = 'mainTitle'
+			) mainTitle,
+			(
+			select contents 
+			FROM comm_code 
+			where code_group='name' 
+			and code_nm = 'subTitle'
+			) subTitle
+		FROM comm_code where code_group='name' limit 1
+
+	</select>
+   
+   
+   
+</mapper>

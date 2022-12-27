@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+ 
+<tiles-definitions>  
+
+<!-- Web StarT -->
+<definition name="layouts-tiles" template="/WEB-INF/views/chat/index.jsp">
+	<put-attribute name="title" 	value="눈 떠보니 사교 파티 호스트가 된 건에 관하여." />
+	<put-attribute name="header" 	value="/WEB-INF/views/layout/header.jsp" />
+	<put-attribute name="content" 	value="" />
+	<put-attribute name="footer"		value="/WEB-INF/views/layout/footer.jsp" />
+</definition>
+
+
+<definition name="*" extends="layouts-tiles">
+  <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+</definition>
+<definition name="*/*" extends="layouts-tiles">
+  <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+</definition>
+<definition name="*/*/*" extends="layouts-tiles">
+  <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+</definition>
+<definition name="*/*/*/*" extends="layouts-tiles">
+  <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
+</definition>
+<!-- Web EnD -->
+
+
+
+</tiles-definitions>
